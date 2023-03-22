@@ -1,0 +1,26 @@
+<%- layout('layouts/boilerplate') %>
+    <h2>Welcome! <%= currentUser.username %>
+    </h2>
+    <form action="/homepage" method="post">
+        <div class="mt-3">
+            <label for="tweet" class="form-label">What's on your mind today</label>
+            <div class="col-8 my-2">
+                <textarea class="form-control" id="tweet" type="text" name="tweet" style="min-height: 100px; max-height: 100px"></textarea>
+            </div>
+            <button class="btn btn-info">Tweet</button>
+        </div>
+    </form>
+    <% if(user.tweets.length) {%>
+        <h3 class="mt-3">Tweets</h3>
+        <% for(let tweet of user.tweets) { %>
+            <div class="col-8 p-2 my-2 rounded border border-info">
+                <p>
+                    <%= tweet.tweet %>
+                </p>
+                <% if(currentUser && tweet.author.equals(currentUser._id)) { %> 
+                    <form action="/homepage/<%= tweet.id %>?_method=DELETE" method="post">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                    <% } %> 
+            </div>
+    <% }} %>

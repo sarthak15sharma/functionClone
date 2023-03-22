@@ -1,0 +1,39 @@
+<%- layout('layouts/boilerplate') %>
+    <% for(let tweet of tweets) { %>
+        <div class="card col-9 mb-3">
+            <div class="card-body pb-0">
+                <h5 class="card-title">from <%= tweet.author.username %>
+                </h5>
+                <p class="card-text">
+                    <%= tweet.tweet %>
+                </p>
+                <% for(comment of tweet.comments) {%>
+                    <div class="col-8 offset-1 bg-secondary bg-opacity-25 rounded mb-2 p-1">
+                        <p class="p-2 pb-0 mb-1"><%= comment.content %></p>
+                        <form action="/homepage/<%= tweet.id %>/<%= comment.id %>?_method=DELETE" method="post">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
+                <% } %>  
+                <div class="col-10 offset-1 comment-input d-block">
+                    <form action="/homepage/<%= tweet.id %>" method="post">
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control" name="content">
+                            <button class="btn btn-sm btn-primary input-group-text">Comment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary col-5 retweet">retweet</a>
+                <a href="#" class="btn btn-primary col-5">share</a>
+            </div>
+        </div>
+        <% } %>
+
+            <script>
+                const retweet = document.querySelector(".retweet");
+                retweet.addEventListener('click', () => {
+                    document.createElement()
+                })
+            </script>
